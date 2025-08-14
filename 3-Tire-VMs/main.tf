@@ -1,11 +1,11 @@
 resource "aws_instance" "linux_instance" {
-    count = length(local.Names)
-    ami           = data.aws_ami.devop_vm_ami.id # Amazon Linux 2 AMI (HVM), SSD Volume Type
-    instance_type = "t3.micro"
-    vpc_security_group_ids = [data.aws_security_group.test_vm_sg.id]
+  count                  = var.instance_count
+  ami                    = data.aws_ami.devop_vm_ami.id # Amazon Linux 2 AMI (HVM), SSD Volume Type
+  instance_type          = var.instance_names[count.index] == "Database" ? "t3.medium" : "t3.small"
+  vpc_security_group_ids = [data.aws_security_group.test_vm_sg.id]
 
-    tags = {
-        Name = local.Names[count.index]
-        Environment = var.Env
-    }
+  tags = {
+    Name        = var.instance_names[count.index]
+    Environment = var.env
+  }
 }

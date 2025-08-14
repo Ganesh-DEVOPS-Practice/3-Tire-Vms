@@ -1,12 +1,18 @@
-variable "Env" {
-    default = "test"
-    description = "Environment for the deployment, e.g., test, prod"
-    type = string
+variable "env" {
+  default     = "test"
+  description = "Environment for the deployment, e.g., test, prod"
+  type        = string
 }
 
-variable "InstanceType" {
-    default = "t3.micro"
-    description = "Type of the EC2 instance to be created"
-    type = string
+
+variable "instance_count" {
+  #default     = 3
+  type        = number
+  description = "Number of EC2 instances to create"
 }
 
+variable "instance_names" {
+  #default     = ["Database", "Backend", "Frontend"]
+  type        = list(string)
+  description = "Names for the EC2 instances"
+}
