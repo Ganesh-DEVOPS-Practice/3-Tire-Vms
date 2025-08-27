@@ -26,3 +26,7 @@ data "aws_security_group" "test_vm_sg" {
   }
 }
 
+data "aws_route53_zone" "my_hosted_zone" {
+  name         = "ganeshdevops.space"
+  private_zone = false
+}
